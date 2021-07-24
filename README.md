@@ -1,4 +1,4 @@
-# lunch-club clone
+# FibonacciSeries_PrimeNumber
 
 ## About
 
