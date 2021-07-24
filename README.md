@@ -20,3 +20,4 @@ This WebSite will help you to calculate Fibonacci series and all prime numbers t
 
 - Create Fibonacci Series till last term
 - Create all Prime Numbers till last term
+- Show last fibonacci number of the series
