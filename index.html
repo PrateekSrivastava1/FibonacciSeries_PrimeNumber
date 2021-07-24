@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FibonacciSeries</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="task"> 
+      <h1 class="appName">Enter the last Fibonacci Number to calculate the fibonacci series 
+          and prime numbers till the last number </h1>
+
+    </div>
+    <div  class="tableBody"> 
+      <table >
+        <tr>
+          <th>S.no</th>
+          <th>Last fibonacci number</th>
+          <th>Fibonacci Series</th>
+          <th>Prime number</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>(0, 1, 1)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>2</td>
+          <td>(0, 1, 1, 2)</td>
+          <td>(2)</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>3</td>
+          <td>(0, 1, 1, 2, 3)</td>
+          <td>(2, 3)</td>
+        </tr>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <br />
+    <br />
+
+    <!-- form to take last value of fibonacci series from user -->
+    <form>
+      <input type="text" name="lastValue" id="lastValue" placeholder="Enter last number"/>
+      <button type="submit">Next</button>
+    </form>
+
+    <!-- javascript code for calculation -->
+    <script>
+
+      const formEL = document.querySelector("form");
+      const tbodyEL = document.querySelector("tbody");
+      let s_no = 3;
+
+      //   check prime number
+      const isPrime = (num) => {
+        for (let i = 2; i < num; i++) 
+        {
+            if (num % i === 0) 
+            {
+                return false
+            }
+        };
+        return num > 1;
+      };
+
+      //   generate fibonacci numbers and storing prime numbers
+      const onAddNextValue = (e) => {
+        e.preventDefault();
+        const lastValue = document.getElementById("lastValue").value;
+        let n1 = 0, n2 = 1, nextTerm, lastTerm;
+
+        // array to store values
+        const fibonacciSeries = [];
+        const totalPrimeNums = [];
+
+        // check that whether the number is prime or not
+        for (let i = 1; i <= lastValue; i++) {
+          if (isPrime(i)) {
+            totalPrimeNums.push(i.toString());
+          }
+        }
+
+        // storing every fibonacci numbers till the last value
+        while (n1 <= lastValue) {
+          const num1 = n1;
+          fibonacciSeries.push(num1.toString());
+          nextTerm = n1 + n2;
+          n1 = n2;
+          n2 = nextTerm;
+        }
+        s_no = s_no + 1;
+        
+        //storing last term of fibonacci number 
+        lastTerm = fibonacciSeries[fibonacciSeries.length - 1];
+        
+        // creating table row to show fibonacci series and prime numbers 
+        tbodyEL.innerHTML += `
+        <tr>
+        <td>${s_no}</td>
+        <td>${lastTerm}</td> 
+        <td>${"(" + fibonacciSeries + ")"}</td>
+        <td>${"(" + totalPrimeNums + ")"}</td> 
+        </tr>
+        `;
+      };
+      formEL.addEventListener("submit", onAddNextValue);
+    </script>
+  </body>
+</html>
